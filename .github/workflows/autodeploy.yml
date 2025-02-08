@@ -27,7 +27,7 @@ jobs:
 
       - name: 部署静态网站到 S3
         run: |
-          aws s3 sync . s3://${{ secrets.AWS_BUCKET_NAME }} \
+          aws s3 cp . s3://${{ secrets.AWS_BUCKET_NAME }} \
             --endpoint-url https://s3.bitiful.net \
             --delete \
             --exact-timestamps \
