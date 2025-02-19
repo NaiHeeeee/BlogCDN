@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>实时时钟</title>
+<title>北京时间实时时钟</title>
 <style>
   body {
     display: flex;
@@ -15,26 +15,31 @@
     background-color: #f5f5f5;
   }
   #clock {
-    font-size: 48px; /* 增大字体大小 */
+    font-size: 48px;
     font-weight: bold;
     color: #333;
   }
 </style>
 <script>
 function updateTime() {
-    var now = new Date(); // 获取当前时间
-    var hours = now.getHours(); // 小时
-    var minutes = now.getMinutes(); // 分钟
-    var seconds = now.getSeconds(); // 秒数
+    var now = new Date();
+    var utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    var beijingTime = new Date(utc + 8 * 3600000); // 转换为北京时间
+    
+    var hours = beijingTime.getHours();
+    var minutes = beijingTime.getMinutes();
+    var seconds = beijingTime.getSeconds();
+    
     var formattedTime = hours + ':' +
                         (minutes < 10 ? '0' : '') + minutes + ':' +
-                        (seconds < 10 ? '0' : '') + seconds;
+                        (seconds < 10 ? '0' : '') + seconds + ' BJT';
+    
     document.getElementById('clock').textContent = formattedTime;
 }
-setInterval(updateTime, 1000); // 每1000毫秒（1秒）更新时间
+setInterval(updateTime, 1000);
 </script>
 </head>
 <body onload="updateTime()">
-<div id="clock"></div> <!-- 时间显示的位置 -->
+<div id="clock"></div>
 </body>
 </html>
