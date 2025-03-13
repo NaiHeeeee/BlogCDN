@@ -24,7 +24,7 @@ jobs:
       # 发布 NPM 包
       - name: Publish Package
         run: |
-          git config --global user.email "2794096231@qq.com@qq.com"
+          git config --global user.email "2794096231@qq.com"
           git config --global user.name "NaiHeeeee"
           npm version patch
           npm publish
